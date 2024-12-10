@@ -1,9 +1,10 @@
 {
   "name": "men-assessment",
-  "version": "1.0.0",
   "description": "MEN stack assessment",
   "main": "api/server.js",
   "scripts": {
+    "start": "node api/server.js",
+    "dev": "nodemon api/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,8 +18,15 @@
   ],
   "author": "boolfalse",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/boolfalse/men-assessment/issues"
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.4"
   },
-  "homepage": "https://github.com/boolfalse/men-assessment#readme"
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
 }

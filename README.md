@@ -13,7 +13,26 @@ MongoDB + Express.js + Node.js assessment project.
 
 - Clone the repository:
 ```bash
-git clone https://github.com/boolfalse/men-assessment.git
+git clone https://github.com/boolfalse/men-assessment.git && cd men-assessment
+```
+
+- Install dependencies:
+```bash
+npm install
+```
+
+- Setup `.env` file as mentioned in `.env.example` file.
+
+- Create a database cluster on MongoDB Atlas. Get the connection string and set **MONGO_URI** variable in `.env` file.
+
+- Run the application (production):
+```bash
+npm run start
+```
+
+- Run the application (development):
+```bash
+npm run dev
 ```
 
 
