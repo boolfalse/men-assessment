@@ -13,14 +13,14 @@ MongoDB + Express.js + Node.js assessment project.
 
 API-endpoints overview on [Postman](https://documenter.getpostman.com/view/1747137/2sAYHwHPzM)
 
-
-
-#### Install Locally:
-
 - Clone the repository:
 ```bash
 git clone https://github.com/boolfalse/men-assessment.git && cd men-assessment
 ```
+
+
+
+#### Installation Steps:
 
 - Install dependencies:
 ```bash
@@ -29,7 +29,12 @@ npm install
 
 - Setup `.env` file as mentioned in `.env.example` file.
 
-- Create a database cluster on MongoDB Atlas. Get the connection string and set **MONGO_URI** variable in `.env` file.
+- Create a database cluster on MongoDB Atlas. Get the connection string and set `MONGO_URI` variable in `.env` file.
+
+
+
+
+#### Run Locally:
 
 - Run the application (production):
 ```bash
@@ -39,6 +44,35 @@ npm run start
 - Run the application (development):
 ```bash
 npm run dev
+```
+
+
+
+#### Run with Docker:
+
+- Build the image:
+```bash
+docker-compose build
+```
+
+- Run the container (`-d` for detached mode):
+```bash
+docker-compose up -d
+```
+
+- Access the application (example port 3000):
+```bash
+curl http://localhost:3000/api
+```
+
+- For stopping the running containers in detached mode:
+```bash
+# Stop running container (or use container IDs)
+docker stop men_assessment_app men_assessment_mongo
+
+# Or stop them by identifying their container IDs
+docker ps
+docker stop <app_id> <mongo_id>
 ```
 
 
@@ -68,6 +102,8 @@ MongoDB connected...
 
   8 passing (9s)
 ```
+
+
 
 #### Author:
 
