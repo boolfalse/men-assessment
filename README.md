@@ -110,6 +110,112 @@ MongoDB connected...
 
 
 
+#### Manual testing using `curl`:
+
+Use below `curl` commands in your CLI step-by-step to test the API endpoints manually.
+
+**NOTES**: Before running the commands, make sure to:
+- Modify `name`, `email`, `password`, and `referral_key` values as per your choice.
+- Replace `<BEARER_TOKEN>` with the actual token received from the login response.
+- Replace `1234abcd` with the actual referral key received from the **Create Link** response.
+- Replace URL port `3000` with the actual port if the application is running on a different port.
+
+<details>
+  <summary>Root URL</summary>
+
+- Test the root URL:
+```bash
+curl --location 'http://localhost:3000/api'
+```
+</details>
+
+<details>
+  <summary>Register as Referrer</summary>
+
+- Register a new user (`referral_key` not provided):
+```bash
+curl --location 'http://localhost:3000/api/users/register' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'name=Referrer1' \
+--data-urlencode 'email=referrer1@example.com' \
+--data-urlencode 'password=password' \
+--data-urlencode 'referral_key='
+```
+</details>
+
+<details>
+  <summary>Login</summary>
+
+- Login with the registered user:
+```bash
+curl --location 'http://localhost:3000/api/users/login' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'email=referrer1@example.com' \
+--data-urlencode 'password=password'
+```
+</details>
+
+<details>
+  <summary>User Profile</summary>
+
+- Get the profile of the authenticated user:
+```bash
+curl --location 'http://localhost:3000/api/users/profile' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--header 'Authorization: Bearer <BEARER_TOKEN>'
+```
+</details>
+
+<details>
+  <summary>Create Link (referral)</summary>
+
+- Create a referral link:
+```bash
+curl --location --request POST 'http://localhost:3000/api/links' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--header 'Authorization: Bearer <BEARER_TOKEN>'
+```
+</details>
+
+<details>
+  <summary>Get Links (referrals)</summary>
+
+- Get the referral links created by the referrer:
+```bash
+curl --location 'http://localhost:3000/api/links' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--header 'Authorization: Bearer <BEARER_TOKEN>'
+```
+</details>
+
+<details>
+  <summary>Register a Referee</summary>
+
+- Register a new user using the referral key (`referral_key` provided):
+```bash
+curl --location 'http://localhost:3000/api/users/register' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--header 'Authorization: Bearer <BEARER_TOKEN>' \
+--data-urlencode 'name=Referee1' \
+--data-urlencode 'email=referee1@example.com' \
+--data-urlencode 'password=password' \
+--data-urlencode 'referral_key=1234abcd'
+```
+</details>
+
+<details>
+  <summary>Get Referral Data</summary>
+
+- Get the count of referrals registered for a single link (referral):
+```bash
+curl --location 'http://localhost:3000/api/links/' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--header 'Authorization: Bearer <BEARER_TOKEN>'
+```
+</details>
+
+
+
 #### Author:
 
 - [Website](https://boolfalse.com)
