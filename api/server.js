@@ -46,3 +46,8 @@ app.use((err, req, res) => {
 });
 
 app.listen(port, () => console.log(`API server listening on port ${port}...`));
+
+
+
+// Exporting the app for testing
+module.exports = app;
