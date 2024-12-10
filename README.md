@@ -9,6 +9,12 @@ MongoDB + Express.js + Node.js assessment project.
 
 
 
+#### Resources:
+
+API-endpoints overview on [Postman](https://documenter.getpostman.com/view/1747137/2sAYHwHPzM)
+
+
+
 #### Install Locally:
 
 - Clone the repository:
