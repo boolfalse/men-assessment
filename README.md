@@ -55,22 +55,27 @@ npm run dev
 docker-compose build
 ```
 
-- Run the container (`-d` for detached mode):
+- Run the container (`-d` for detached mode). This will run the application on port 3000 by default.
 ```bash
 docker-compose up -d
 ```
 
-- Access the application (example port 3000):
+- Use this command to run on a different port (3001 in the example).
+```bash
+HOST_PORT=3001 docker-compose up -d
+```
+
+- Access the application (for default port 3000):
 ```bash
 curl http://localhost:3000/api
 ```
 
 - For stopping the running containers in detached mode:
 ```bash
-# Stop running container (or use container IDs)
+# stop them by using the service names
 docker stop men_assessment_app men_assessment_mongo
 
-# Or stop them by identifying their container IDs
+# or by identifying their container IDs and stopping them
 docker ps
 docker stop <app_id> <mongo_id>
 ```
@@ -79,7 +84,7 @@ docker stop <app_id> <mongo_id>
 
 #### Run Tests:
 
-- Run tests (this will work with `NODE_ENV=development`):
+- Run tests (this supposed to work for `NODE_ENV=development`):
 ```bash
 npm run test
 ```
