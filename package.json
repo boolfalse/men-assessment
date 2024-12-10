@@ -1,0 +1,24 @@
+{
+  "name": "men-assessment",
+  "version": "1.0.0",
+  "description": "MEN stack assessment",
+  "main": "api/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boolfalse/men-assessment.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "boolfalse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boolfalse/men-assessment/issues"
+  },
+  "homepage": "https://github.com/boolfalse/men-assessment#readme"
+}
