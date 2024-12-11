@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 let conn;
 
 const connectDB = async () => {
+    if (!process.env.MONGO_URI) {
+        console.error('MONGO_URI is missing!');
+        process.exit(1);
+    }
+
     try {
         conn = await mongoose.connect(process.env.MONGO_URI);
 

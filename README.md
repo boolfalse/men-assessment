@@ -29,8 +29,12 @@ npm install
 
 - Setup `.env` file as mentioned in `.env.example` file.
 
-- Create a database cluster on MongoDB Atlas. Get the connection string and set `MONGO_URI` variable in `.env` file.
 
+- You can skip this if you're planning to run the application in a Docker container. Otherwise, create a database cluster on [MongoDB Atlas](https://cloud.mongodb.com/), get the connection string and set `MONGO_URI` variable in `.env` file as mentioned in `.env.example` file:
+```dotenv
+# Use this when connecting to MongoDB Atlas
+MONGO_URI=mongodb+srv://<MONGO_USER>:<MONGO_PASS>@<MONGO_HOST>/?retryWrites=true&w=majority
+```
 
 
 
@@ -60,7 +64,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-- Use this command to run on a different port (3001 in the example).
+- **[Optional:]** Use this command to run on a different port (3001 is in the example).
 ```bash
 HOST_PORT=3001 docker-compose up -d
 ```
