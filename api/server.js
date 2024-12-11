@@ -2,12 +2,19 @@
 require('dotenv').config();
 const express = require('express');
 const { connectDB } = require('./config/database');
+const seedUsers = require('./seeds/users');
 const port = process.env.PORT || 3000;
 
 
 
 connectDB().then(conn => {
     console.log('MongoDB connected...');
+    if (
+        process.argv.includes('db:seed') // app runs without docker by: `npm run start db:seed`
+        || process.env.DB_SEED === 'true' // app runs with docker by: `DB_SEED=true docker-compose up -d`
+    ) {
+        seedUsers().then(() => console.log('Users seeded.'));
+    }
 });
 
 const app = express();

@@ -69,7 +69,12 @@ MONGO_URI=mongodb+srv://<MONGO_USER>:<MONGO_PASS>@<MONGO_HOST>/?retryWrites=true
 docker-compose build
 ```
 
-- Run the container (`-d` for detached mode). This will run the application on port 3000 by default.
+- This will run the application on port 3000 by default. `DB_SEED=true` is for seeding an admin user in the database. Run the container (`-d` for detached mode):
+```bash
+DB_SEED=true docker-compose up -d
+```
+
+- If you want to run the application without seeding the database, just use without `DB_SEED` command:
 ```bash
 docker-compose up -d
 ```
@@ -124,9 +129,9 @@ docker-compose run app npm run test
   - cURL (for manual testing)
 
 
-- Run the application (production):
+- Run the application. `db:seed` is an optional command to seed admin user in the database.
 ```bash
-npm run start
+npm run start db:seed
 ```
 
 - Run the application (development):
@@ -141,9 +146,9 @@ npm run dev
 
 #### Run Tests Locally (without Docker):
 
-- Run tests (this supposed to work for `NODE_ENV=development`):
+- Run tests (this will set `NODE_ENV=development` and run the tests). `db:seed` is an optional command to seed admin user in the database.
 ```bash
-npm run test
+npm run test db:seed
 ```
 
 

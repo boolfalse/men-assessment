@@ -127,6 +127,7 @@ module.exports = {
                 id: req.user.id,
                 name: req.user.name,
                 email: req.user.email,
+                isAdmin: req.user.isAdmin,
             },
             message: 'User profile retrieved successfully.',
         });

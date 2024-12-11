@@ -30,6 +30,7 @@ const auth = asyncHandler(async (req, res, next) => {
             id: user._id,
             name: user.name,
             email: user.email,
+            isAdmin: user.isAdmin,
         };
         next();
     } catch (err) {
