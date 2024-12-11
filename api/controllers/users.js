@@ -11,35 +11,10 @@ const staticData = require('../config/static-data');
 
 module.exports = {
     register: asyncHandler(async (req, res) => {
+        // query parameters are validated in the middleware
         const { name, email, password, referral_key } = req.body;
-        if (!name || !email || !password) {
-            return res.status(422).json({
-                success: false,
-                message: 'Name, email and password are required!'
-            });
-        }
 
-        const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!emailRegex.test(String(email).toLowerCase())) {
-            return res.status(422).json({
-                success: false,
-                message: 'Invalid email!'
-            });
-        }
-        if (password.length < staticData.password_min_length || password.length > staticData.password_max_length) {
-            return res.status(422).json({
-                success: false,
-                message: `Password must be between ${staticData.password_min_length} and ${staticData.password_max_length} characters!`
-            });
-        }
-        if (referral_key && referral_key.length !== staticData.referral_key_length) {
-            return res.status(401).json({
-                success: false,
-                message: 'Invalid referral key!'
-            });
-        }
-
-        let user = await User.findOne({ email });
+        const user = await User.findOne({ email });
         if (user) {
             return res.status(400).json({
                 success: false,
@@ -80,13 +55,8 @@ module.exports = {
         });
     }),
     login: asyncHandler(async (req, res) => {
+        // query parameters are validated in the middleware
         const { email, password } = req.body;
-        if (!email || !password) {
-            return res.status(422).json({
-                success: false,
-                message: 'Email and password are required!'
-            });
-        }
 
         const user = await User.findOne({ email });
         if (!user) {
