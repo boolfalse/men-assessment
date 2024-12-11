@@ -4,6 +4,10 @@ module.exports = {
     password_min_length: 6,
     password_max_length: 30,
     referral_key_length: 8,
+    pagination: {
+        per_default: 5,
+        per_max: 10,
+    },
     seeds: {
         users: [
             {

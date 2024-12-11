@@ -289,6 +289,19 @@ curl --location 'http://localhost:3000/api/users/login' \
 ```
 </details>
 
+<details>
+  <summary>Get Users (as admin)</summary>
+
+Get users with pagination:
+`per` is the number of users per page and `page` is the page number. Maximum `per` value can be set to 10. Default `per` value is 5. Default `page` value is 1.
+
+`BEARER_TOKEN` is the token received from the login response. `per`: 2, `page`: 1
+```bash
+curl --location 'http://localhost:3000/api/admin/users?per=2&page=1' \
+--header 'Authorization: Bearer <BEARER_TOKEN>'
+```
+</details>
+
 
 
 
