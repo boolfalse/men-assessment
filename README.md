@@ -170,7 +170,7 @@ Use below `curl` commands in your CLI step-by-step to test the API endpoints man
 <details>
   <summary>Root URL</summary>
 
-- Test the root URL:
+Test the root URL:
 ```bash
 curl --location 'http://localhost:3000/api'
 ```
@@ -179,25 +179,29 @@ curl --location 'http://localhost:3000/api'
 <details>
   <summary>Register as Referrer</summary>
 
-- Register a new user (`referral_key` not provided):
+Register a new user (`referral_key` not provided):
+
+`name`: Referrer, `email`: referrer@example.com, `password`: password
 ```bash
 curl --location 'http://localhost:3000/api/users/register' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode 'name=Referrer1' \
---data-urlencode 'email=referrer1@example.com' \
+--data-urlencode 'name=Referrer' \
+--data-urlencode 'email=referrer@example.com' \
 --data-urlencode 'password=password' \
 --data-urlencode 'referral_key='
 ```
 </details>
 
 <details>
-  <summary>Login</summary>
+  <summary>Login (as regular user)</summary>
 
-- Login with the registered user:
+Login as a regular user:
+
+`email`: referrer@example.com, `password`: password
 ```bash
 curl --location 'http://localhost:3000/api/users/login' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode 'email=referrer1@example.com' \
+--data-urlencode 'email=referrer@example.com' \
 --data-urlencode 'password=password'
 ```
 </details>
@@ -205,7 +209,9 @@ curl --location 'http://localhost:3000/api/users/login' \
 <details>
   <summary>User Profile</summary>
 
-- Get the profile of the authenticated user:
+Get the profile of the authenticated user:
+
+`BEARER_TOKEN` is the token received from the login response.
 ```bash
 curl --location 'http://localhost:3000/api/users/profile' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -216,7 +222,9 @@ curl --location 'http://localhost:3000/api/users/profile' \
 <details>
   <summary>Create Link (referral)</summary>
 
-- Create a referral link:
+Create a referral link:
+
+`BEARER_TOKEN` is the token received from the login response.
 ```bash
 curl --location --request POST 'http://localhost:3000/api/links' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -227,7 +235,9 @@ curl --location --request POST 'http://localhost:3000/api/links' \
 <details>
   <summary>Get Links (referrals)</summary>
 
-- Get the referral links created by the referrer:
+Get the referral links created by the referrer:
+
+`BEARER_TOKEN` is the token received from the login response.
 ```bash
 curl --location 'http://localhost:3000/api/links' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -238,13 +248,15 @@ curl --location 'http://localhost:3000/api/links' \
 <details>
   <summary>Register a Referee</summary>
 
-- Register a new user using the referral key (`referral_key` provided):
+Register a new user using the referral key (`referral_key` provided):
+
+`name`: Referee, `email`: referee@example.com, `password`: password, `referral_key`: 1234abcd, `BEARER_TOKEN` is the token received from the login response.
 ```bash
 curl --location 'http://localhost:3000/api/users/register' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header 'Authorization: Bearer <BEARER_TOKEN>' \
---data-urlencode 'name=Referee1' \
---data-urlencode 'email=referee1@example.com' \
+--data-urlencode 'name=Referee' \
+--data-urlencode 'email=referee@example.com' \
 --data-urlencode 'password=password' \
 --data-urlencode 'referral_key=1234abcd'
 ```
@@ -253,11 +265,27 @@ curl --location 'http://localhost:3000/api/users/register' \
 <details>
   <summary>Get Referral Data</summary>
 
-- Get the count of referrals registered for a single link (referral):
+Get the count of referrals registered for a single link (referral):
+
+`BEARER_TOKEN` is the token received from the login response.
 ```bash
 curl --location 'http://localhost:3000/api/links/' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header 'Authorization: Bearer <BEARER_TOKEN>'
+```
+</details>
+
+<details>
+  <summary>Login (as admin)</summary>
+
+Login as an admin user:
+
+`email`: admin@example.com, `password`: password
+```bash
+curl --location 'http://localhost:3000/api/users/login' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'email=admin@example.com' \
+--data-urlencode 'password=password'
 ```
 </details>
 
