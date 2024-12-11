@@ -19,7 +19,17 @@ MongoDB + Express.js + Node.js assessment project.
 - [Run Tests with Docker](#run_tests_with_docker)
 - [Run Locally (without Docker)](#run_without_docker)
 - [Run Tests Locally (without Docker)](#run_tests_without_docker)
-- [Manual testing using `curl`](#manual_testing)
+- [Request Examples with `curl`](#curl_request_examples)
+  - [Root URL](#root_url)
+  - [Register as Referrer](#register_as_referrer)
+  - [Login (as regular user)](#login_as_regular_user)
+  - [User Profile](#user_profile)
+  - [Create Link (referral)](#create_link_referral)
+  - [Get Links (referrals)](#get_links_referrals)
+  - [Register a Referee](#register_a_referee)
+  - [Get Referral Data](#get_referral_data)
+  - [Login (as admin)](#login_as_admin)
+  - [Get Users (as admin)](#get_users_as_admin)
 - [Test Results Snapshot](#test_results_snapshot)
 
 
@@ -154,9 +164,9 @@ npm run test db:seed
 
 
 
-<a name="manual_testing"></a>
+<a name="curl_request_examples"></a>
 
-#### Manual testing using `curl`:
+#### Request Examples with `curl`:
 
 Use below `curl` commands in your CLI step-by-step to test the API endpoints manually.
 
@@ -167,6 +177,8 @@ Use below `curl` commands in your CLI step-by-step to test the API endpoints man
 - Replace `1234abcd` with the actual referral key received from the **Create Link** response.
 - Replace URL port `3000` with the actual port if the application is running on a different port.
 
+<a name="root_url"></a>
+
 <details>
   <summary>Root URL</summary>
 
@@ -175,6 +187,8 @@ Test the root URL:
 curl --location 'http://localhost:3000/api'
 ```
 </details>
+
+<a name="register_as_referrer"></a>
 
 <details>
   <summary>Register as Referrer</summary>
@@ -192,6 +206,8 @@ curl --location 'http://localhost:3000/api/users/register' \
 ```
 </details>
 
+<a name="login_as_regular_user"></a>
+
 <details>
   <summary>Login (as regular user)</summary>
 
@@ -206,6 +222,8 @@ curl --location 'http://localhost:3000/api/users/login' \
 ```
 </details>
 
+<a name="user_profile"></a>
+
 <details>
   <summary>User Profile</summary>
 
@@ -218,6 +236,8 @@ curl --location 'http://localhost:3000/api/users/profile' \
 --header 'Authorization: Bearer <BEARER_TOKEN>'
 ```
 </details>
+
+<a name="create_link_referral"></a>
 
 <details>
   <summary>Create Link (referral)</summary>
@@ -232,6 +252,8 @@ curl --location --request POST 'http://localhost:3000/api/links' \
 ```
 </details>
 
+<a name="get_links_referrals"></a>
+
 <details>
   <summary>Get Links (referrals)</summary>
 
@@ -244,6 +266,8 @@ curl --location 'http://localhost:3000/api/links' \
 --header 'Authorization: Bearer <BEARER_TOKEN>'
 ```
 </details>
+
+<a name="register_a_referee"></a>
 
 <details>
   <summary>Register a Referee</summary>
@@ -262,6 +286,8 @@ curl --location 'http://localhost:3000/api/users/register' \
 ```
 </details>
 
+<a name="get_referral_data"></a>
+
 <details>
   <summary>Get Referral Data</summary>
 
@@ -274,6 +300,8 @@ curl --location 'http://localhost:3000/api/links/' \
 --header 'Authorization: Bearer <BEARER_TOKEN>'
 ```
 </details>
+
+<a name="login_as_admin"></a>
 
 <details>
   <summary>Login (as admin)</summary>
@@ -289,15 +317,17 @@ curl --location 'http://localhost:3000/api/users/login' \
 ```
 </details>
 
+<a name="get_users_as_admin"></a>
+
 <details>
   <summary>Get Users (as admin)</summary>
 
 Get users with pagination:
-`per` is the number of users per page and `page` is the page number. Maximum `per` value can be set to 10. Default `per` value is 5. Default `page` value is 1.
+`per` is the number of users per page and `page` is the page number. Maximum `per` value can be set to 10. Default `per` value is 5. Default `page` value is 1. `term` is the search term for filtering users by name or email. `term` is case-insensitive and can be 1-20 characters long.
 
-`BEARER_TOKEN` is the token received from the login response. `per`: 2, `page`: 1
+`BEARER_TOKEN` is the token received from the login response. `per`: 2, `page`: 1, `term`: ReFeR
 ```bash
-curl --location 'http://localhost:3000/api/admin/users?per=2&page=1' \
+curl --location 'http://localhost:3000/api/admin/users?per=2&page=1&term=ReFeR' \
 --header 'Authorization: Bearer <BEARER_TOKEN>'
 ```
 </details>
