@@ -1,15 +1,14 @@
 
+require('colors');
 const mongoose = require('mongoose');
 let conn;
 
 const connectDB = async () => {
-    if (!process.env.MONGO_URI) {
-        console.error('MONGO_URI is missing!');
-        process.exit(1);
-    }
+    const mongoUri = process.env.MONGO_URI || 'mongodb://mongo:27017/men_assessment';
+    console.log(`Please wait while connecting to MongoDB...`.cyan.underline.bold);
 
     try {
-        conn = await mongoose.connect(process.env.MONGO_URI);
+        conn = await mongoose.connect(mongoUri);
 
         console.log(`MongoDB host: ${conn.connection.host}`);
     } catch (err) {

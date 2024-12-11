@@ -38,7 +38,14 @@ MONGO_URI=mongodb+srv://<MONGO_USER>:<MONGO_PASS>@<MONGO_HOST>/?retryWrites=true
 
 
 
-#### Run Locally:
+#### Run Locally (without Docker):
+
+- Make sure you have the following installed on your system:
+  - Node.js (v18 or higher) with npm
+  - MongoDB (v4.4 or higher)
+  - Postman (for manual testing)
+  - cURL (for manual testing)
+
 
 - Run the application (production):
 ```bash
@@ -64,12 +71,12 @@ docker-compose build
 docker-compose up -d
 ```
 
-- **[Optional:]** Use this command to run on a different port (3001 is in the example).
+- **Optional:** Use this command to run on a different port (3001 is in the example).
 ```bash
 HOST_PORT=3001 docker-compose up -d
 ```
 
-- Access the application (for default port 3000):
+- **Optional:** Check the application (for default port 3000):
 ```bash
 curl http://localhost:3000/api
 ```

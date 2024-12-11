@@ -1,7 +1,7 @@
 
-const User = require('../api/models/User');
-const Link = require('../api/models/Link');
-const Referral = require('../api/models/Referral');
+const User = require('../api/models/user');
+const Link = require('../api/models/link');
+const Referral = require('../api/models/referral');
 
 module.exports = {
     sampleData: {
