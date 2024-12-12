@@ -74,9 +74,8 @@ module.exports = {
             });
         }
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-            expiresIn: process.env.JWT_EXPIRES_IN || '30d',
-        });
+        const secretKey = process.env.SECRET_KEY || 'SecretKeyForEncryption';
+        const token = jwt.sign({ id: user._id }, secretKey, { expiresIn: '1d' });
 
         return res.status(200).json({
             success: true,

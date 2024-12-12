@@ -3,16 +3,13 @@
 FROM node:20
 
 # Set the working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy all into the working directory
+COPY . .
 
 # Install dependencies
 RUN npm install
-
-# Copy the rest of the files
-COPY . .
 
 # Expose port 3000
 EXPOSE 3000

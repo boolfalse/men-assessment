@@ -1,6 +1,9 @@
 
 require('dotenv').config();
 const express = require('express');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const cookieParser = require('cookie-parser');
 const { connectDB } = require('./config/database');
 const seedUsers = require('./seeds/users');
 const port = process.env.PORT || 3000;
@@ -18,6 +21,27 @@ connectDB().then(conn => {
 });
 
 const app = express();
+
+app.use(cookieParser());
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: true,
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGO_URI || 'mongodb://mongo:27017/men_assessment',
+            // mongoOptions: {
+            //     useNewUrlParser: true,
+            //     useUnifiedTopology: true,
+            // },
+        }),
+        cookie: {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
+        },
+    })
+);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

@@ -2,10 +2,53 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
 const validate = require('../validations/admin');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 
 
 module.exports = {
+    login: asyncHandler(async (req, res) => {
+        // query parameters are validated in the middleware
+        const { email, password } = req.body;
+
+        const admin_user = await User.findOne({ email, isAdmin: true });
+        if (!admin_user) {
+            return res.status(400).json({
+                success: false,
+                message: 'Admin does not exist!'
+            });
+        }
+
+        const isMatch = await bcrypt.compare(password, admin_user.password);
+        if (!isMatch) {
+            return res.status(400).json({
+                success: false,
+                message: 'Incorrect password!'
+            });
+        }
+
+        const secretKey = process.env.SECRET_KEY || 'SecretKeyForEncryption';
+        const token = jwt.sign({ id: admin_user._id }, secretKey, { expiresIn: '1d' });
+
+        req.session.admin_token = token;
+        res.cookie('admin_token', token, {
+            httpOnly: true,
+            // secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 24 * 60 * 60 * 1000 // 1 day
+        });
+
+        return res.status(200).json({
+            success: true,
+            data: {
+                id: admin_user._id,
+                name: admin_user.name,
+                email: admin_user.email,
+            },
+            message: 'Admin logged in successfully.',
+        });
+    }),
     getUsers: asyncHandler(async (req, res) => {
         // validate and sanitize the query parameters
         const { filteredData, errMessage } = validate.getUsers(req.query);
@@ -66,5 +109,14 @@ module.exports = {
                 message: err.message || err.toString(),
             });
         }
+    }),
+    logout: asyncHandler(async (req, res) => {
+        req.session.destroy();
+        res.clearCookie('admin_token');
+
+        return res.status(200).json({
+            success: true,
+            message: 'Admin logged out successfully.',
+        });
     }),
 }

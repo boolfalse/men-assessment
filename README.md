@@ -116,6 +116,8 @@ docker stop <app_id> <mongo_id>
 
 #### Run Tests with Docker:
 
+> **NOTE:** At this time test are written for the regular users (non-admin) only as per the assessment requirements. However, you can test admin endpoints manually using Postman or cURL.
+
 - Make sure you've built the image as mentioned in the [Run with Docker](#run_with_docker) section.
 
 
@@ -155,6 +157,8 @@ npm run dev
 <a name="run_tests_without_docker"></a>
 
 #### Run Tests Locally (without Docker):
+
+> **NOTE:** At this time test are written for the regular users (non-admin) only as per the assessment requirements. However, you can test admin endpoints manually using Postman or cURL.
 
 - Run tests (this will set `NODE_ENV=development` and run the tests). `db:seed` is an optional command to seed admin user in the database.
 ```bash
@@ -310,7 +314,7 @@ Login as an admin user:
 
 `email`: admin@example.com, `password`: password
 ```bash
-curl --location 'http://localhost:3000/api/users/login' \
+curl --location 'http://localhost:3000/api/admin/login' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'email=admin@example.com' \
 --data-urlencode 'password=password'
@@ -325,10 +329,10 @@ curl --location 'http://localhost:3000/api/users/login' \
 Get users with pagination:
 `per` is the number of users per page and `page` is the page number. Maximum `per` value can be set to 10. Default `per` value is 5. Default `page` value is 1. `term` is the search term for filtering users by name or email. `term` is case-insensitive and can be 1-20 characters long.
 
-`BEARER_TOKEN` is the token received from the login response. `per`: 2, `page`: 1, `term`: ReFeR
+`BEARER_TOKEN` is the token received from the admin login response. `per`: 2, `page`: 1, `term`: ReFeR
 ```bash
 curl --location 'http://localhost:3000/api/admin/users?per=2&page=1&term=ReFeR' \
---header 'Authorization: Bearer <BEARER_TOKEN>'
+--header 'Cookie: admin_token=<BEARER_TOKEN>'
 ```
 </details>
 
