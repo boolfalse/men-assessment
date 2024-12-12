@@ -13,6 +13,7 @@ MongoDB + Express.js + Node.js assessment project.
 
 ### Table of Contents
 
+- [Features:](#features)
 - [Resources](#resources)
 - [Installation Steps](#installation_steps)
 - [Run with Docker](#run_with_docker)
@@ -35,13 +36,30 @@ MongoDB + Express.js + Node.js assessment project.
 
 
 
+<a name="features"></a>
+
+#### Features:
+
+- User (referrer/referee) authentication via JWT and password hashing.
+- Referral link creation and registration of referees.
+- Admin authentication (session/cookie-based).
+- Listing users with pagination and search functionality for admin.
+- Middlewares for authentication and validation (express-validator).
+- Containerized application with Docker.
+- Automated tests for regular users (non-admin) using: Mocha, Chai, Supertest.
+- _More features can be added in the future._
+
+
+
+
 <a name="resources"></a>
 
 #### Resources:
 
-API-endpoints overview on [Postman](https://documenter.getpostman.com/view/1747137/2sAYHwHPzM)
+- API-endpoints overview on [Postman](https://documenter.getpostman.com/view/1747137/2sAYHwHPzM)
 
-- Clone the repository:
+
+- GitHub [Repository](https://github.com/boolfalse/men-assessment):
 ```bash
 git clone https://github.com/boolfalse/men-assessment.git && cd men-assessment
 ```
