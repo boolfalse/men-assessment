@@ -46,7 +46,8 @@ MongoDB + Express.js + Node.js assessment project.
 - Listing users with pagination and search functionality for admin.
 - Middlewares for authentication and validation (express-validator).
 - Containerized application with Docker.
-- Automated tests for regular users (non-admin) using: Mocha, Chai, Supertest.
+- Automated tests for regular users (non-admin) using: Jest (on `master` branch).
+- Automated tests for regular users (non-admin) using: Mocha, Chai, Supertest (on `tests_mocha` branch).
 - _More features can be added in the future._
 
 
@@ -361,19 +362,39 @@ curl --location 'http://localhost:3000/api/admin/users?per=2&page=1&term=ReFeR' 
 
 #### Test Results Snapshot:
 
-Test results example (taken from the local running application without Docker):
+- Test results example (taken from the local running application without Docker):
 ```text
-  API Endpoints
-    √ Should return success message for root URL (39ms)
-    √ Should return registered referrer data (744ms)
-    √ Should return logged in user data (432ms)
-    √ Should return authorized user profile (291ms)
-    √ Should return created referral link (580ms)
-    √ Should return registered referee data (707ms)
-    √ Should return referral links created by user (566ms)
-    √ Should return referral data (count of referrals registered) (882ms)
+$ npm run test
 
-  8 passing (9s)
+> test
+> jest
+
+ PASS  __tests__/links.test.js
+ PASS  __tests__/users.test.js
+
+Test Suites: 2 passed, 2 total
+Tests:       14 passed, 14 total
+Snapshots:   0 total
+Time:        1.451 s, estimated 2 s
+Ran all test suites.
+```
+
+- Test results example (taken from the tests running within a Docker container):
+```text
+$ docker-compose run app npm run test
+Starting men_assessment_mongo ... done
+
+> test
+> jest
+
+ PASS  __tests__/links.test.js
+ PASS  __tests__/users.test.js
+
+Test Suites: 2 passed, 2 total
+Tests:       14 passed, 14 total
+Snapshots:   0 total
+Time:        1.553 s
+Ran all test suites.
 ```
 
 

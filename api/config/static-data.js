@@ -1,6 +1,6 @@
 
 module.exports = {
-    testSecretKey: 'SecretKeyForTesting',
+    testSecretKey: process.env.SECRET_KEY || 'SecretKeyForEncryption',
     user_password: {
         min_length: 6,
         max_length: 30,

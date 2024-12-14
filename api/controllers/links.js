@@ -14,15 +14,10 @@ module.exports = {
             });
 
             const linksWithReferralEndpoints = links.map(link => {
-                let endpointHost = ''; // empty string is for testing
-                if (process.env.BASE_URL && process.env.PORT) {
-                    endpointHost = `${process.env.BASE_URL}:${process.env.PORT}`;
-                }
-
                 return {
                     id: link._id,
                     referral_key: link.referral_key,
-                    referral_endpoint: `${endpointHost}/api/links/${link.referral_key}`
+                    referral_endpoint: `/api/links/${link.referral_key}`
                 };
             });
 
@@ -44,16 +39,11 @@ module.exports = {
                 user: req.user.id,
             });
 
-            let endpointHost = ''; // empty string is for testing
-            if (process.env.BASE_URL && process.env.PORT) {
-                endpointHost = `${process.env.BASE_URL}:${process.env.PORT}`;
-            }
-
             return res.status(201).json({
                 success: true,
                 data: {
                     referral_key: link.referral_key,
-                    referral_endpoint: `${endpointHost}/api/links/${link.referral_key}`
+                    referral_endpoint: `/api/links/${link.referral_key}`
                 },
                 message: 'Link created successfully.'
             });
