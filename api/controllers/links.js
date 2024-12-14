@@ -14,17 +14,22 @@ module.exports = {
             });
 
             const linksWithReferralEndpoints = links.map(link => {
+                let endpointHost = ''; // empty string is for testing
+                if (process.env.BASE_URL && process.env.PORT) {
+                    endpointHost = `${process.env.BASE_URL}:${process.env.PORT}`;
+                }
+
                 return {
                     id: link._id,
                     referral_key: link.referral_key,
-                    referral_endpoint: `${process.env.BASE_URL}:${process.env.PORT}/api/links/${link.referral_key}`
+                    referral_endpoint: `${endpointHost}/api/links/${link.referral_key}`
                 };
             });
 
             return res.status(200).json({
                 success: true,
                 data: linksWithReferralEndpoints,
-                message: 'Links'
+                message: 'Links retrieved successfully.'
             });
         } catch (err) {
             return res.status(500).json({
@@ -39,11 +44,16 @@ module.exports = {
                 user: req.user.id,
             });
 
+            let endpointHost = ''; // empty string is for testing
+            if (process.env.BASE_URL && process.env.PORT) {
+                endpointHost = `${process.env.BASE_URL}:${process.env.PORT}`;
+            }
+
             return res.status(201).json({
                 success: true,
                 data: {
                     referral_key: link.referral_key,
-                    referral_endpoint: `${process.env.BASE_URL}:${process.env.PORT}/api/links/${link.referral_key}`
+                    referral_endpoint: `${endpointHost}/api/links/${link.referral_key}`
                 },
                 message: 'Link created successfully.'
             });
@@ -61,7 +71,7 @@ module.exports = {
             if (!referralKeyRegex.test(referral_key)) {
                 return res.status(404).json({
                     success: false,
-                    message: `Referral key is invalid!`
+                    message: 'Referral key is invalid!'
                 });
             }
 
@@ -71,7 +81,7 @@ module.exports = {
             if (!link) {
                 return res.status(404).json({
                     success: false,
-                    message: `Link not found!`
+                    message: 'Link not found!'
                 });
             }
 
@@ -84,6 +94,7 @@ module.exports = {
                 data: {
                     used: count,
                 },
+                message: 'Referral information retrieved successfully.'
             });
         } catch (err) {
             return res.status(500).json({
