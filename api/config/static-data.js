@@ -1,8 +1,15 @@
 
 module.exports = {
-    password_salt_rounds: 10,
-    password_min_length: 6,
-    password_max_length: 30,
+    testSecretKey: 'SecretKeyForTesting',
+    user_password: {
+        min_length: 6,
+        max_length: 30,
+        salt_rounds: 10,
+    },
+    user_name: {
+        min_length: 2,
+        max_length: 50,
+    },
     referral_key_length: 8,
     pagination: {
         per_default: 5,

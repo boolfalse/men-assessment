@@ -5,7 +5,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
 const Link = require('../models/link');
 const Referral = require('../models/referral');
-const staticData = require('../config/static-data');
+const { testSecretKey, user_password } = require('../config/static-data');
 
 
 
@@ -22,7 +22,7 @@ module.exports = {
             });
         }
 
-        const salt = await bcrypt.genSalt(staticData.password_salt_rounds);
+        const salt = await bcrypt.genSalt(user_password.salt_rounds);
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const regUser = await User.create({
@@ -74,7 +74,7 @@ module.exports = {
             });
         }
 
-        const secretKey = process.env.SECRET_KEY || 'SecretKeyForEncryption';
+        const secretKey = process.env.SECRET_KEY || testSecretKey;
         const token = jwt.sign({ id: user._id }, secretKey, { expiresIn: '1d' });
 
         return res.status(200).json({

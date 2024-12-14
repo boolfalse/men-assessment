@@ -1,8 +1,8 @@
 
 const { seeds } = require('../config/static-data');
 const User = require('../models/user');
-const bcrypt = require("bcryptjs");
-const staticData = require("../config/static-data");
+const bcrypt = require('bcryptjs');
+const { user_password } = require('../config/static-data');
 
 
 
@@ -15,7 +15,7 @@ const seedUsers = async () => {
 
     try {
         for (let user of users) {
-            const salt = await bcrypt.genSalt(staticData.password_salt_rounds);
+            const salt = await bcrypt.genSalt(user_password.salt_rounds);
             const password = await bcrypt.hash(user.plain_password, salt);
 
             await User.create({

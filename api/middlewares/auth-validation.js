@@ -11,8 +11,8 @@ module.exports = {
             .isEmpty()
             .withMessage('Name can\'t be empty!')
             .bail()
-            .isLength({ min: 2, max: 50 })
-            .withMessage('Name must be between 2 and 50 characters!')
+            .isLength({ min: staticData.user_name.min_length, max: staticData.user_name.max_length })
+            .withMessage(`Name must be between ${staticData.user_name.min_length} and ${staticData.user_name.max_length} characters!`)
             .bail(),
         check('email') // email validation
             .trim()
@@ -29,8 +29,8 @@ module.exports = {
             .isEmpty()
             .withMessage('Password can\'t be empty!')
             .bail()
-            .isLength({ min: 6, max: 20 })
-            .withMessage('Password must be between 6 and 20 characters!')
+            .isLength({ min: staticData.user_password.min_length, max: staticData.user_password.max_length })
+            .withMessage(`Password must be between ${staticData.user_password.min_length} and ${staticData.user_password.max_length} characters!`)
             .bail(),
         check('referral_key') // referral key validation
             .optional()
@@ -41,10 +41,10 @@ module.exports = {
         (req, res, next) => {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                const messages = errors.array().map(error => error.msg); // messages.join(' ')
+                const messages = errors.array().map(error => error.msg);
                 return res.status(422).json({
                     success: false,
-                    messages,
+                    message: messages.join(' '),
                 });
             }
             next();
@@ -66,16 +66,16 @@ module.exports = {
             .isEmpty()
             .withMessage('Password can\'t be empty!')
             .bail()
-            .isLength({ min: 6, max: 20 })
-            .withMessage('Password must be between 6 and 20 characters!')
+            .isLength({ min: staticData.user_password.min_length, max: staticData.user_password.max_length })
+            .withMessage(`Password must be between ${staticData.user_password.min_length} and ${staticData.user_password.max_length} characters!`)
             .bail(),
         (req, res, next) => {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                const messages = errors.array().map(error => error.msg); // messages.join(' ')
+                const messages = errors.array().map(error => error.msg);
                 return res.status(422).json({
                     success: false,
-                    messages,
+                    message: messages.join(' '),
                 });
             }
             next();

@@ -4,6 +4,7 @@ const User = require('../models/user');
 const validate = require('../validations/admin');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { testSecretKey } = require('../config/static-data');
 
 
 
@@ -28,7 +29,7 @@ module.exports = {
             });
         }
 
-        const secretKey = process.env.SECRET_KEY || 'SecretKeyForEncryption';
+        const secretKey = process.env.SECRET_KEY || testSecretKey;
         const token = jwt.sign({ id: admin_user._id }, secretKey, { expiresIn: '1d' });
 
         req.session.admin_token = token;

@@ -2,6 +2,7 @@
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
+const { testSecretKey } = require('../config/static-data');
 
 
 
@@ -17,9 +18,10 @@ module.exports = {
 
         try {
             const token = bearerToken.split(' ')[1];
-            const decoded = jwt.verify(token, process.env.SECRET_KEY);
+            const secretKey = process.env.SECRET_KEY || testSecretKey;
+            const decoded = jwt.verify(token, secretKey);
 
-            const user = await User.findById(decoded.id).select('-password');
+            const user = await User.findById(decoded.id);
             if (!user) {
                 return res.status(401).json({
                     success: false,
@@ -51,7 +53,7 @@ module.exports = {
         }
 
         try {
-            const secretKey = process.env.SECRET_KEY || 'SecretKeyForEncryption';
+            const secretKey = process.env.SECRET_KEY || testSecretKey;
             const decoded = jwt.verify(token, secretKey);
 
             const admin_user = await User.findById(decoded.id).select('-password');

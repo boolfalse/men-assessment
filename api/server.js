@@ -11,12 +11,12 @@ const port = process.env.PORT || 3000;
 
 
 connectDB().then(conn => {
-    console.log('MongoDB connected...');
+    console.info('MongoDB connected...');
     if (
         process.argv.includes('db:seed') // app runs without docker by: `npm run start db:seed`
         || process.env.DB_SEED === 'true' // app runs with docker by: `DB_SEED=true docker-compose up -d`
     ) {
-        seedUsers().then(() => console.log('Users seeded.'));
+        seedUsers().then(() => console.info('Users seeded.'));
     }
 });
 
@@ -77,7 +77,7 @@ app.use((err, req, res) => {
     });
 });
 
-app.listen(port, () => console.log(`API server listening on port ${port}...`));
+app.listen(port, () => console.info(`API server listening on port ${port}...`));
 
 
 
