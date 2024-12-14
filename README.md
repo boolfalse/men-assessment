@@ -31,7 +31,9 @@ MongoDB + Express.js + Node.js assessment project.
   - [Get Referral Data](#get_referral_data)
   - [Login (as admin)](#login_as_admin)
   - [Get Users (as admin)](#get_users_as_admin)
+- [Credentials for Manual Testing](#manual_testing_credentials)
 - [Test Results Snapshot](#test_results_snapshot)
+- [Author](#author)
 
 
 
@@ -40,14 +42,15 @@ MongoDB + Express.js + Node.js assessment project.
 
 #### Features:
 
-- User (referrer/referee) authentication via JWT and password hashing.
-- Referral link creation and registration of referees.
-- Admin authentication (session/cookie-based).
-- Listing users with pagination and search functionality for admin.
-- Middlewares for authentication and validation (express-validator).
-- Containerized application with Docker.
-- Automated tests for regular users (non-admin) using: Jest (on `master` branch).
-- Automated tests for regular users (non-admin) using: Mocha, Chai, Supertest (on `tests_mocha` branch).
+- User (referrer/referee) authentication via **JWT** and **password hashing**.
+- **Referral link creation** and registration of referees.
+- **Session/Cookie-based authentication** for admin.
+- Listing users with **pagination** and **search** functionality for admin.
+- Middlewares for authentication and **validation** (express-validator).
+- Containerized application with **Docker**.
+- Automated tests for regular users (non-admin) using: **Jest** (on [`master`](https://github.com/boolfalse/men-assessment/tree/master) branch).
+- Automated tests for regular users (non-admin) using: **Mocha**, **Chai**, **Supertest** (on [`tests_mocha`](https://github.com/boolfalse/men-assessment/tree/tests_mocha) branch).
+- API Documentation with **Postman**.
 - _More features can be added in the future._
 
 
@@ -358,6 +361,30 @@ curl --location 'http://localhost:3000/api/admin/users?per=2&page=1&term=ReFeR' 
 
 
 
+<a name="manual_testing_credentials"></a>
+
+#### Credentials for Manual Testing:
+
+Below are admin user credentials for testing:
+```text
+email: admin@example.com
+password: password
+```
+
+Below are regular user credentials for testing:
+```text
+# Referrer
+email: referrer@example.com
+password: password
+
+# Referee
+email: referee@example.com
+password: password
+```
+
+
+
+
 <a name="test_results_snapshot"></a>
 
 #### Test Results Snapshot:
@@ -399,6 +426,8 @@ Ran all test suites.
 
 
 
+
+<a name="author"></a>
 
 #### Author:
 
