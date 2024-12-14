@@ -21,6 +21,7 @@ afterEach(() => {
 const app = express();
 app.use(express.json());
 app.use('/api/links', require('../api/routes/links'));
+const endpointHost = `${process.env.BASE_URL}:${process.env.PORT}`;
 
 // For Authenticated Users Only
 describe('Links Routes', () => {
@@ -60,8 +61,8 @@ describe('Links Routes', () => {
             User.findById.mockResolvedValue(existingUser);
 
             const existingLinks = [
-                { referral_key: '1111aaaa', referral_endpoint: '/api/links/1111aaaa' },
-                { referral_key: '2222bbbb', referral_endpoint: '/api/links/2222bbbb' },
+                { referral_key: '1111aaaa', referral_endpoint: `${endpointHost}/api/links/1111aaaa` },
+                { referral_key: '2222bbbb', referral_endpoint: `${endpointHost}/api/links/2222bbbb` },
             ];
 
             Link.find.mockResolvedValue(existingLinks);
@@ -115,7 +116,7 @@ describe('Links Routes', () => {
                 success: true,
                 data: {
                     referral_key: '1234abcd',
-                    referral_endpoint: '/api/links/1234abcd',
+                    referral_endpoint: `${endpointHost}/api/links/1234abcd`,
                 },
                 message: 'Link created successfully.',
             });

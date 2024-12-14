@@ -87,10 +87,10 @@ module.exports = {
                 next = '';
             }
 
-            // Construct the previous and next page URIs
-            const uriPrefix = `/api/admin/users`
-            const prevPage = `${uriPrefix}?per=${filteredData.per}&page=${prev}`;
-            const nextPage = `${uriPrefix}?per=${filteredData.per}&page=${next}`;
+            // Construct the previous and next page URLs
+            const endpointHost = `${process.env.BASE_URL}:${process.env.PORT}`;
+            const prevPage = `${endpointHost}/api/admin/users?per=${filteredData.per}&page=${prev}`;
+            const nextPage = `${endpointHost}/api/admin/users?per=${filteredData.per}&page=${next}`;
 
             return res.status(200).json({
                 success: true,

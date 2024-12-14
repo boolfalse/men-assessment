@@ -6,4 +6,5 @@ module.exports = {
         '**/?(*.)+(spec|test).js?(x)',
     ],
     moduleFileExtensions: [ 'js', 'json', 'jsx', 'node' ],
+    setupFiles: [ 'dotenv/config' ],
 };
