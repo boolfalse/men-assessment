@@ -10,20 +10,24 @@ const connectDB = async () => {
     try {
         conn = await mongoose.connect(mongoUri);
 
-        console.info(`MongoDB host: ${conn.connection.host}`);
+        console.info(`MongoDB host: ${conn.connection.host}`.green.bold);
     } catch (err) {
         console.error(err.message);
         process.exit(1);
     }
 }
 
-const closeDB = async () => {
+const closeDB = async (dropDatabase = false) => {
     if (!conn) return;
     try {
-        await mongoose.connection.close();
-        console.info('Closed MongoDB connection!');
+        if (dropDatabase) {
+            await mongoose.connection.dropDatabase();
+            console.info(`Dropped MongoDB database.`.red.bold);
+        }
+        await mongoose.connection.close(); // await mongoose.disconnect();
+        console.info(`Closed MongoDB connection.`.yellow.bold);
     } catch (err) {
-        console.error('Error closing MongoDB connection', err);
+        console.error('Error closing MongoDB connection!', err);
     }
 };
 
