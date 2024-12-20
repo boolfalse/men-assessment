@@ -1,7 +1,6 @@
 
 const express = require('express');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
 const cookieParser = require('cookie-parser');
 
 
@@ -14,10 +13,7 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
-        store: MongoStore.create({
-            mongoUrl: process.env.MONGO_URI || 'mongodb://mongo:27017/men_assessment',
-            // mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
-        }),
+        store: new session.MemoryStore(), // alternative to `MongoStore`
         cookie: {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',

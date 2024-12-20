@@ -140,11 +140,14 @@ docker stop <app_id> <mongo_id>
 
 > **NOTE:** At this time test are written for the regular users (non-admin) only as per the assessment requirements. However, you can test admin endpoints manually using Postman or cURL.
 
-- Make sure you've built the image as mentioned in the [Run with Docker](#run_with_docker) section.
+- Before running tests with Docker, make sure you've built the image as it's mentioned in the [Run with Docker](#run_with_docker) section:
+```bash
+docker-compose build
+```
 
+Below command will set `NODE_ENV=development` and run the tests.
 
-- Run tests within a Docker container from the host machine.
-  This will run the application in the test environment and execute the tests.
+- Run unit tests within a Docker container from the host machine.
 ```bash
 docker-compose run app npm run test
 ```
@@ -182,9 +185,11 @@ npm run dev
 
 > **NOTE:** At this time test are written for the regular users (non-admin) only as per the assessment requirements. However, you can test admin endpoints manually using Postman or cURL.
 
-- Run tests (this will set `NODE_ENV=development` and run the tests). `db:seed` is an optional command to seed admin user in the database.
+Below command will set `NODE_ENV=development` and run the tests.
+
+- Run unit tests.
 ```bash
-npm run test db:seed
+npm run test
 ```
 
 

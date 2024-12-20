@@ -3,8 +3,7 @@ require('colors');
 const mongoose = require('mongoose');
 let conn;
 
-const connectDB = async () => {
-    const mongoUri = process.env.MONGO_URI || 'mongodb://mongo:27017/men_assessment';
+const connectDB = async (mongoUri) => {
     console.info(`Please wait while connecting to MongoDB...`.cyan.underline.bold);
 
     try {
@@ -15,7 +14,7 @@ const connectDB = async () => {
         console.error(err.message);
         process.exit(1);
     }
-}
+};
 
 const closeDB = async (dropDatabase = false) => {
     if (!conn) return;
