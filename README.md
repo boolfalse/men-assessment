@@ -4,7 +4,7 @@
 
 
 
-#### About:
+### About:
 
 MongoDB + Express.js + Node.js assessment project.
 
@@ -32,7 +32,6 @@ MongoDB + Express.js + Node.js assessment project.
   - [Login (as admin)](#login_as_admin)
   - [Get Users (as admin)](#get_users_as_admin)
 - [Credentials for Manual Testing](#manual_testing_credentials)
-- [Test Results Snapshot](#test_results_snapshot)
 - [Author](#author)
 
 
@@ -40,7 +39,7 @@ MongoDB + Express.js + Node.js assessment project.
 
 <a name="features"></a>
 
-#### Features:
+### Features:
 
 - User (referrer/referee) authentication via **JWT** and **password hashing**.
 - **Referral link creation** and registration of referees.
@@ -58,7 +57,7 @@ MongoDB + Express.js + Node.js assessment project.
 
 <a name="resources"></a>
 
-#### Resources:
+### Resources:
 
 - API-endpoints overview on [Postman](https://documenter.getpostman.com/view/1747137/2sAYHwHPzM)
 
@@ -73,7 +72,7 @@ git clone https://github.com/boolfalse/men-assessment.git && cd men-assessment
 
 <a name="installation_steps"></a>
 
-#### Installation Steps:
+### Installation Steps:
 
 - Install dependencies:
 ```bash
@@ -94,7 +93,7 @@ MONGO_URI=mongodb+srv://<MONGO_USER>:<MONGO_PASS>@<MONGO_HOST>/?retryWrites=true
 
 <a name="run_with_docker"></a>
 
-#### Run with Docker:
+### Run with Docker:
 
 - Build the image:
 ```bash
@@ -136,7 +135,7 @@ docker stop <app_id> <mongo_id>
 
 <a name="run_tests_with_docker"></a>
 
-#### Run Tests with Docker:
+### Run Tests with Docker:
 
 > **NOTE:** At this time test are written for the regular users (non-admin) only as per the assessment requirements. However, you can test admin endpoints manually using Postman or cURL.
 
@@ -145,9 +144,20 @@ docker stop <app_id> <mongo_id>
 docker-compose build
 ```
 
-Below command will set `NODE_ENV=development` and run the tests.
+Below commands will set `NODE_ENV=development` and run the tests.
 
 - Run unit tests within a Docker container from the host machine.
+```bash
+docker-compose run app npm run test:unit
+```
+
+- Run integration (end-to-end) tests within a Docker container from the host machine.
+```bash
+docker-compose run app npm run test:e2e
+```
+
+- Run all tests (unit and integration) within a Docker container from the host machine.
+  This command will run unit tests first and then integration (e2e) tests.
 ```bash
 docker-compose run app npm run test
 ```
@@ -157,7 +167,7 @@ docker-compose run app npm run test
 
 <a name="run_without_docker"></a>
 
-#### Run Locally (without Docker):
+### Run Locally (without Docker):
 
 - Make sure you have the following installed on your system:
   - Node.js (v18 or higher) with npm
@@ -181,13 +191,24 @@ npm run dev
 
 <a name="run_tests_without_docker"></a>
 
-#### Run Tests Locally (without Docker):
+### Run Tests Locally (without Docker):
 
 > **NOTE:** At this time test are written for the regular users (non-admin) only as per the assessment requirements. However, you can test admin endpoints manually using Postman or cURL.
 
-Below command will set `NODE_ENV=development` and run the tests.
+Below commands will set `NODE_ENV=development` and run the tests.
 
 - Run unit tests.
+```bash
+npm run test:unit
+```
+
+- Run integration (end-to-end) tests within a Docker container from the host machine.
+```bash
+npm run test:e2e
+```
+
+- Run all tests (unit and integration).
+  This command will run unit tests first and then integration (e2e) tests.
 ```bash
 npm run test
 ```
@@ -197,7 +218,7 @@ npm run test
 
 <a name="curl_request_examples"></a>
 
-#### Request Examples with `curl`:
+### Request Examples with `curl`:
 
 Use below `curl` commands in your CLI step-by-step to test the API endpoints manually.
 
@@ -208,21 +229,20 @@ Use below `curl` commands in your CLI step-by-step to test the API endpoints man
 - Replace `1234abcd` with the actual referral key received from the **Create Link** response.
 - Replace URL port `3000` with the actual port if the application is running on a different port.
 
+
 <a name="root_url"></a>
 
-<details>
-  <summary>Root URL</summary>
+#### Root URL
 
 Test the root URL:
 ```bash
 curl --location 'http://localhost:3000/api'
 ```
-</details>
+
 
 <a name="register_as_referrer"></a>
 
-<details>
-  <summary>Register as Referrer</summary>
+#### Register as Referrer
 
 Register a new user (`referral_key` not provided):
 
@@ -235,12 +255,11 @@ curl --location 'http://localhost:3000/api/users/register' \
 --data-urlencode 'password=password' \
 --data-urlencode 'referral_key='
 ```
-</details>
+
 
 <a name="login_as_regular_user"></a>
 
-<details>
-  <summary>Login (as regular user)</summary>
+#### Login (as regular user)
 
 Login as a regular user:
 
@@ -251,12 +270,11 @@ curl --location 'http://localhost:3000/api/users/login' \
 --data-urlencode 'email=referrer@example.com' \
 --data-urlencode 'password=password'
 ```
-</details>
+
 
 <a name="user_profile"></a>
 
-<details>
-  <summary>User Profile</summary>
+#### User Profile
 
 Get the profile of the authenticated user:
 
@@ -266,12 +284,11 @@ curl --location 'http://localhost:3000/api/users/profile' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header 'Authorization: Bearer <BEARER_TOKEN>'
 ```
-</details>
+
 
 <a name="create_link_referral"></a>
 
-<details>
-  <summary>Create Link (referral)</summary>
+#### Create Link (referral)
 
 Create a referral link:
 
@@ -281,12 +298,11 @@ curl --location --request POST 'http://localhost:3000/api/links' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header 'Authorization: Bearer <BEARER_TOKEN>'
 ```
-</details>
+
 
 <a name="get_links_referrals"></a>
 
-<details>
-  <summary>Get Links (referrals)</summary>
+#### Get Links (referrals)
 
 Get the referral links created by the referrer:
 
@@ -296,12 +312,11 @@ curl --location 'http://localhost:3000/api/links' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header 'Authorization: Bearer <BEARER_TOKEN>'
 ```
-</details>
+
 
 <a name="register_a_referee"></a>
 
-<details>
-  <summary>Register a Referee</summary>
+#### Register a Referee
 
 Register a new user using the referral key (`referral_key` provided):
 
@@ -315,12 +330,11 @@ curl --location 'http://localhost:3000/api/users/register' \
 --data-urlencode 'password=password' \
 --data-urlencode 'referral_key=1234abcd'
 ```
-</details>
+
 
 <a name="get_referral_data"></a>
 
-<details>
-  <summary>Get Referral Data</summary>
+#### Get Referral Data
 
 Get the count of referrals registered for a single link (referral):
 
@@ -330,12 +344,11 @@ curl --location 'http://localhost:3000/api/links/' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header 'Authorization: Bearer <BEARER_TOKEN>'
 ```
-</details>
+
 
 <a name="login_as_admin"></a>
 
-<details>
-  <summary>Login (as admin)</summary>
+#### Login (as admin)
 
 Login as an admin user:
 
@@ -346,12 +359,11 @@ curl --location 'http://localhost:3000/api/admin/login' \
 --data-urlencode 'email=admin@example.com' \
 --data-urlencode 'password=password'
 ```
-</details>
+
 
 <a name="get_users_as_admin"></a>
 
-<details>
-  <summary>Get Users (as admin)</summary>
+#### Get Users (as admin)
 
 Get users with pagination:
 `per` is the number of users per page and `page` is the page number. Maximum `per` value can be set to 10. Default `per` value is 5. Default `page` value is 1. `term` is the search term for filtering users by name or email. `term` is case-insensitive and can be 1-20 characters long.
@@ -361,14 +373,13 @@ Get users with pagination:
 curl --location 'http://localhost:3000/api/admin/users?per=2&page=1&term=ReFeR' \
 --header 'Cookie: admin_token=<BEARER_TOKEN>'
 ```
-</details>
 
 
 
 
 <a name="manual_testing_credentials"></a>
 
-#### Credentials for Manual Testing:
+### Credentials for Manual Testing:
 
 Below are admin user credentials for testing:
 ```text
@@ -390,51 +401,9 @@ password: password
 
 
 
-<a name="test_results_snapshot"></a>
-
-#### Test Results Snapshot:
-
-- Test results example (taken from the local running application without Docker):
-```text
-$ npm run test
-
-> test
-> jest
-
- PASS  __tests__/links.test.js
- PASS  __tests__/users.test.js
-
-Test Suites: 2 passed, 2 total
-Tests:       14 passed, 14 total
-Snapshots:   0 total
-Time:        1.451 s, estimated 2 s
-Ran all test suites.
-```
-
-- Test results example (taken from the tests running within a Docker container):
-```text
-$ docker-compose run app npm run test
-Starting men_assessment_mongo ... done
-
-> test
-> jest
-
- PASS  __tests__/links.test.js
- PASS  __tests__/users.test.js
-
-Test Suites: 2 passed, 2 total
-Tests:       14 passed, 14 total
-Snapshots:   0 total
-Time:        1.553 s
-Ran all test suites.
-```
-
-
-
-
 <a name="author"></a>
 
-#### Author:
+### Author:
 
 - [Website](https://boolfalse.com)
 - [LinkedIn](https://www.linkedin.com/in/boolfalse/)

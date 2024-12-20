@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node api/server.js",
     "dev": "nodemon api/server.js",
-    "test": "jest"
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "cross-env NODE_ENV=development jest --testPathPattern=__tests__ --detectOpenHandles",
+    "test:e2e": "cross-env NODE_ENV=development jest --testPathPattern=e2e --detectOpenHandles"
   },
   "repository": {
     "type": "git",
