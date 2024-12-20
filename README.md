@@ -16,6 +16,7 @@ MongoDB + Express.js + Node.js assessment project.
 - [Features:](#features)
 - [Resources](#resources)
 - [Installation Steps](#installation_steps)
+- [List of Commands](#list_of_commands)
 - [Run with Docker](#run_with_docker)
 - [Run Tests with Docker](#run_tests_with_docker)
 - [Run Locally (without Docker)](#run_without_docker)
@@ -87,6 +88,88 @@ npm install
 # Use this when connecting to MongoDB Atlas
 MONGO_URI=mongodb+srv://<MONGO_USER>:<MONGO_PASS>@<MONGO_HOST>/?retryWrites=true&w=majority
 ```
+
+
+
+
+<a name="list_of_commands"></a>
+
+### List of Commands:
+
+> **NOTE:** for detailed information, read the appropriate sections below.
+
+Below is the list of commands available to run the application and tests.
+
+
+<details>
+  <summary>
+    <strong>Work with Docker (click to expand/collapse)</strong>
+  </summary>
+
+- Before running with Docker, make sure to build the image:
+  ```bash
+  docker-compose build
+  ```
+
+- Run the application with Docker (short version without detached mode):
+  ```bash
+  docker-compose up
+  ```
+
+- Run the application with Docker (with seeding):
+  ```bash
+  DB_SEED=true docker-compose up
+  ```
+
+- Run unit tests with Docker:
+  ```bash
+  docker-compose run app npm run test:unit
+  ```
+
+- Run integration (end-to-end) tests with Docker:
+  ```bash
+  docker-compose run app npm run test:e2e
+  ```
+
+- Run all tests (unit and integration) with Docker:
+  ```bash
+  docker-compose run app npm run test
+  ```
+
+</details>
+
+
+<details>
+  <summary>
+    <strong>Work in local / host machine (click to expand/collapse)</strong>
+  </summary>
+
+- Run the application locally:
+  ```bash
+  npm run start
+  ```
+
+- Run the application locally (with seeding):
+  ```bash
+  npm run start db:seed
+  ```
+
+- Run unit tests locally:
+  ```bash
+  npm run test:unit
+  ```
+
+- Run integration (end-to-end) tests locally:
+  ```bash
+  npm run test:e2e
+  ```
+
+- Run all tests (unit and integration) locally:
+  ```bash
+  npm run test
+  ```
+
+</details>
 
 
 
